@@ -1,0 +1,17 @@
+.sensor-card {
+    border: 1px solid #efefef !important;
+    overflow: hidden;
+}
+
+.sensor-card .card-body {
+    padding: 15px;
+}
+
+.sensor-card .table {
+    margin-bottom: 0;
+}
+
+.sensor-data {
+    max-height: 300px;
+    overflow-y: auto;
+}

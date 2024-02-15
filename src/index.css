@@ -1,0 +1,11 @@
+body, #root {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-color: #212529; /* Dark background */
+  color: #ffffff; /* Light text color */
+}
+
+html, body {
+  height: 100%;
+}

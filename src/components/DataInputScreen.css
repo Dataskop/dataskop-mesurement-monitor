@@ -1,0 +1,79 @@
+.data-input-screen-wrapper {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.sensor-forms-container {
+  background-color: #212529;
+  border: 1px solid #343a40;
+  padding: 10px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  color: #ffffff;
+}
+
+/* CSS */
+.button-89 {
+  display: flex;
+  align-items: center;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 20px;
+  padding: 0.7em 1.4em 0.7em 1.1em;
+  color: #333333;
+  background: #ad5389;
+  background: linear-gradient(0deg, rgba(255, 165, 0, 1) 0%, rgba(255, 193, 113, 1) 100%);
+  border: none;
+  box-shadow: 0 0.7em 1.5em -0.5em rgba(255, 165, 0, 0.6);
+  letter-spacing: 0.05em;
+  border-radius: 20em;
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-89:hover {
+  box-shadow: 0 0.5em 1.5em -0.5em rgba(255, 165, 0, 0.6);
+}
+
+.button-89:active {
+  box-shadow: 0 0.3em 1em -0.5em rgba(255, 165, 0, 0.6);
+}
+
+.tooltip-inner {
+  background-color: #303233 !important;
+  color: #ffffff !important;
+  border: 2px solid #FFA500 !important;
+  box-shadow: 0 0 5px #FFA500;
+}
+
+.bs-tooltip-top .tooltip-arrow::before,
+.bs-tooltip-auto[x-placement^="top"] .tooltip-arrow::before {
+  border-top-color: #212529 !important;
+}
+
+.history-button {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+  background-color: #FFA500;
+  border: none;
+  border-radius: 50%;
+  padding: 10px;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.history-button:hover {
+  background-color: #e69500;
+}
+
+.copyRightClaims {
+  position: absolute;
+  bottom: 2vh;
+  right: 2vw;
+  font-size: 0.6em;
+}
