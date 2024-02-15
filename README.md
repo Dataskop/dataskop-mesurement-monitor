@@ -7,8 +7,11 @@ In terms of user session management, the application offers a convenient feature
 
 The application requires an integration with the Dataskop backend, including the necessary access token. However, its utility extends beyond this specific backend; it is designed to be compatible with any API that requires an access token for access and returns data in a JSON format, particularly those containing "timestamp" and "value" properties. This makes it a versatile tool for various applications in data monitoring and debugging across different platforms and systems.
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![Figure 1](https://github.com/Dataskop/dataskop-mesurement-monitor/blob/main/Datainput-page.png)
+*Figure 1: Showing the data input page*
+
+![Figure 2](https://github.com/Dataskop/dataskop-mesurement-monitor/blob/main/Sensor-tables.png)
+*Figure 2: Showing the seonsor tables page*
 
 ## Hosted Version
 [x](x)
