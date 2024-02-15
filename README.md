@@ -14,7 +14,7 @@ The application requires an integration with the Dataskop backend, including the
 *Figure 2: Showing the seonsor tables page*
 
 ## Hosted Version
-[x](x)
+[https://dataskop-mesaurement-monitor.netlify.app/](https://dataskop-mesaurement-monitor.netlify.app/)
 
 ## Features
 
