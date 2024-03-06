@@ -13,6 +13,40 @@ const DataInputScreen = ({ onSave }) => {
     const savedSessions = localStorage.getItem('sessionsHistory');
     return savedSessions ? JSON.parse(savedSessions) : [];
   });
+  const [maxValuesCount, setMaxValuesCount] = useState(() => {
+    return parseInt(localStorage.getItem('maxValuesCount')) || 20;
+  });
+
+  const handleSettingsClick = () => {
+    Swal.fire({
+      title: 'Settings',
+      input: 'number',
+      inputLabel: 'The maximum amount of values that should be kept when using NOT the "advanced" sensor path. The sensor values get accumulated over time. This amount specifies how many values are shown at once.',
+      inputValue: maxValuesCount,
+      inputAttributes: {
+        min: 1,
+        step: 1,
+      },
+      customClass: {
+        container: 'dark-mode-swal',
+      },
+      showCancelButton: true,
+      confirmButtonText: 'Save',
+      preConfirm: (newValue) => {
+        const parsedValue = parseInt(newValue, 10);
+        if (!parsedValue || parsedValue < 1) {
+          Swal.showValidationMessage(`Invalid count: ${newValue}`);
+          return false;
+        }
+        return parsedValue;
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setMaxValuesCount(result.value);
+        localStorage.setItem('maxValuesCount', result.value.toString());
+      }
+    });
+  };
 
   const handleSensorChange = (index) => (updatedSensor) => {
     const newSensors = [...sensors];
@@ -267,6 +301,9 @@ const DataInputScreen = ({ onSave }) => {
     <div className="container pt-5 data-input-screen-wrapper">
       <button className="history-button" onClick={handleViewHistory}>
         🕒
+      </button>
+      <button className="settings-button" onClick={handleSettingsClick}>
+        ⚙️
       </button>
       <div
         className="sensor-forms-container"

@@ -60,3 +60,7 @@ body {
 .dark-mode-swal .swal2-styled.swal2-cancel {
     background-color: #dc3545;
 }
+
+.dark-mode-swal .swal2-input-label {
+    max-width: 90% !important;
+}

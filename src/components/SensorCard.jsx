@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { formatTimestamp, renderAdditionalInfo } from '../utils';
-import Swal from 'sweetalert2';
 
 import './SensorCard.css';
 
@@ -14,33 +13,48 @@ const SensorCard = ({
 }) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [attemptMade, setAttemptMade] = useState(false);
+  const [isFetching, setIsFetching] = useState(false);
   const [error, setError] = useState(null);
+  const [sensorValues, setSensorValues] = useState([]);
+  const maxValuesCount = parseInt(localStorage.getItem('maxValuesCount')) || 20;
 
   const fetchData = useCallback(async () => {
+    if (isFetching) return;
+
     try {
       const response = await axios.get(apiPath, {
         headers: {
           Authorization: `Bearer ${accessToken}`,
         },
       });
-      setData(response.data);
+
+      // Check if "advanced" path is used
+      if (apiPath.includes('advanced')) {
+        setData(response.data);
+      } else {
+        // Handle sensor data accumulation
+        setSensorValues((prevValues) => {
+          const updatedValues = [...prevValues, response.data];
+          return updatedValues.slice(-maxValuesCount);
+        });
+      }
+
       setLoading(false);
-      console.log(response.data)
     } catch (error) {
       setLoading(false);
-      setAttemptMade(true);
 
       if (error.response && error.response.status === 401) {
         setError('Unauthorized access. Please check your access token.');
       } else {
         setError('Failed to fetch data. Please try again later.');
       }
+    } finally {
+      setLoading(false);
+      setIsFetching(false);
     }
   }, [apiPath, accessToken]);
 
   useEffect(() => {
-    if (attemptMade) return;
     fetchData();
   }, [fetchData, refreshKey]);
 
@@ -65,6 +79,37 @@ const SensorCard = ({
       </div>
     );
   }
+
+  // Determine if we're rendering advanced sensor data or a list of sensor values
+  const renderSensorData = () => {
+    if (apiPath.includes('advanced') || !sensorValues.length) {
+      return (
+        data &&
+        data.measurementResults &&
+        data.measurementResults.map((item, index) => (
+          <tr key={index}>
+            <td>{formatTimestamp(item.timeStamp)}</td>
+            <td>{item.value}</td>
+            <td>
+              {item.additionalProperties &&
+                renderAdditionalInfo(item.additionalProperties)}
+            </td>
+          </tr>
+        ))
+      );
+    } else {
+      return sensorValues.map((value, index) => (
+        <tr key={index}>
+          <td>{formatTimestamp(value.timeStamp)}</td>
+          <td>{value.value}</td>
+          <td>
+            {value.additionalProperties &&
+              renderAdditionalInfo(value.additionalProperties)}
+          </td>
+        </tr>
+      ));
+    }
+  };
 
   return (
     <div className="col-md-6 mb-4">
@@ -98,7 +143,8 @@ const SensorCard = ({
                 </tr>
               </thead>
               <tbody>
-                {data &&
+                {renderSensorData()}
+                {/* {data &&
                   data.measurementResults &&
                   data.measurementResults.map((item, index) => (
                     <tr key={index}>
@@ -109,7 +155,7 @@ const SensorCard = ({
                           renderAdditionalInfo(item.additionalProperties)}
                       </td>
                     </tr>
-                  ))}
+                  ))} */}
               </tbody>
             </table>
           </div>

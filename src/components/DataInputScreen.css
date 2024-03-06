@@ -71,6 +71,24 @@
   background-color: #e69500;
 }
 
+.settings-button {
+  position: fixed;
+  top: 60px;
+  right: 10px;
+  z-index: 1000;
+  background-color: #efefef;
+  border: none;
+  border-radius: 50%;
+  padding: 10px;
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.settings-button:hover {
+  background-color: #efefef78;
+}
+
 .copyRightClaims {
   position: absolute;
   bottom: 2vh;
